@@ -90,6 +90,7 @@ body:hover .cursor-follower { opacity: 1; }
   font-size: 1.6rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .nav-logo-img {
@@ -999,6 +1000,7 @@ body:hover .cursor-follower { opacity: 1; }
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
   .nav { padding: 20px 30px; }
+  .nav.scrolled { padding: 20px 30px; }
   .nav-links { gap: 24px; }
 
   .hero {

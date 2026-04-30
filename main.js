@@ -52,18 +52,13 @@
 
   // ─── NAV SCROLL ───────────────────────────────
   const nav = document.getElementById('nav');
-  let lastScrollY = 0;
 
   function onScroll() {
-    const scrollY = window.scrollY;
-
-    if (scrollY > 60) {
+    if (window.scrollY > 60) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
     }
-
-    lastScrollY = scrollY;
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -223,24 +218,6 @@
     });
   });
 
-  // ─── SCROLL PROGRESS INDICATOR ────────────────
-  const progressBar = document.createElement('div');
-  progressBar.style.cssText = `
-    position: fixed;
-    top: 0; left: 0;
-    height: 2px;
-    width: 0%;
-    background: linear-gradient(90deg, #7a0e25, #a01530);
-    z-index: 9998;
-    transition: width 0.1s;
-    pointer-events: none;
-  `;
-  document.body.appendChild(progressBar);
 
-  window.addEventListener('scroll', () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / total) * 100;
-    progressBar.style.width = progress + '%';
-  }, { passive: true });
 
 })();
