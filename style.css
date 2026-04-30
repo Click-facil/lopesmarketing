@@ -788,7 +788,7 @@ body:hover .cursor-follower { opacity: 1; }
 .ceo-graphic {
   position: absolute;
   right: -140px;
-  top: -30px;
+  top: 47px;
   transform: none;
   width: 540px; height: 680px;
   flex-shrink: 0;
