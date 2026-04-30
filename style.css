@@ -1015,7 +1015,7 @@ body:hover .cursor-follower { opacity: 1; }
     background-position: center top;
   }
   .hero-img-mobile { display: none; }
-  .hero-content { text-align: center; padding-top: 40px; }
+  .hero-content { text-align: center; padding-top: 80px; }
   .hero-eyebrow { justify-content: center; color: var(--white); }
   .hero-eyebrow .line { background: rgba(255,255,255,0.6); }
   .hero-title-row.italic { color: rgba(255,255,255,0.85); }
