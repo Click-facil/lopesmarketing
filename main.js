@@ -31,7 +31,7 @@
     animateFollower();
 
     // Cursor states
-    const hoverEls = document.querySelectorAll('a, button, .servico-item, .mvv-card, .contato-card');
+    const hoverEls = document.querySelectorAll('a, button, .servico-row, .mvv-card, .contato-card');
     hoverEls.forEach(el => {
       el.addEventListener('mouseenter', () => {
         cursor.style.width = '6px';
@@ -77,7 +77,7 @@
 
   // ─── INTERSECTION OBSERVER — REVEALS ──────────
   const revealEls = document.querySelectorAll(
-    '.mvv-card, .servico-item, .contato-card, .origem-quote, .origem-text, .timeline-item, .ceo-text, .ceo-graphic, .frase-inner'
+    '.mvv-card, .servico-row, .contato-card, .origem-quote, .origem-text, .timeline-item, .ceo-text, .ceo-graphic, .frase-inner'
   );
 
   revealEls.forEach(el => el.classList.add('reveal'));
@@ -100,7 +100,7 @@
   }
 
   staggerChildren('.mvv-card', 100);
-  staggerChildren('.servico-item', 60);
+  staggerChildren('.servico-row', 60);
   staggerChildren('.timeline-item', 150);
 
   // ─── TIMELINE OBSERVER ────────────────────────
@@ -167,17 +167,33 @@
     yearObserver.observe(yearEl);
   }
 
-  // ─── SERVICO ITEMS — NUMBER ROLL ──────────────
-  document.querySelectorAll('.servico-item').forEach(item => {
-    item.addEventListener('mouseenter', function () {
-      const arrow = this.querySelector('.servico-arrow');
-      if (!arrow._ani) {
-        arrow._ani = true;
-        arrow.style.transition = 'transform 0.35s cubic-bezier(0.76,0,0.24,1), color 0.35s';
-        setTimeout(() => { arrow._ani = false; }, 400);
-      }
+  // ─── SPOTLIGHT SERVIÇOS ───────────────────────
+  const servicoRows = document.querySelectorAll('.servico-row');
+  const painelItems = document.querySelectorAll('.painel-item');
+  const isMobile = () => window.innerWidth <= 900;
+
+  servicoRows.forEach(row => {
+    // desktop: hover
+    row.addEventListener('mouseenter', () => {
+      if (isMobile()) return;
+      const idx = row.dataset.index;
+      servicoRows.forEach(r => r.classList.remove('active'));
+      painelItems.forEach(p => p.classList.remove('active'));
+      row.classList.add('active');
+      document.querySelector(`.painel-item[data-index="${idx}"]`).classList.add('active');
+    });
+
+    // mobile: click accordion
+    row.addEventListener('click', () => {
+      if (!isMobile()) return;
+      const isActive = row.classList.contains('active');
+      servicoRows.forEach(r => r.classList.remove('active'));
+      if (!isActive) row.classList.add('active');
     });
   });
+
+  // ─── SERVICO ITEMS — NUMBER ROLL ──────────────
+  // (removido — estrutura antiga)
 
   // ─── MARQUEE PAUSE ON HOVER ───────────────────
   const marquee = document.querySelector('.hero-marquee');
